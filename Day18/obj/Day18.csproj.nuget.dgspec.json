@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\PCuser\\source\\repos\\Day18\\Day18\\Day18.csproj": {}
+    "C:\\Users\\PCuser\\Documents\\GitHub\\GM07_ChoiGyeom_Test\\Day18\\Day18.csproj": {}
   },
   "projects": {
-    "C:\\Users\\PCuser\\source\\repos\\Day18\\Day18\\Day18.csproj": {
+    "C:\\Users\\PCuser\\Documents\\GitHub\\GM07_ChoiGyeom_Test\\Day18\\Day18.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\PCuser\\source\\repos\\Day18\\Day18\\Day18.csproj",
+        "projectUniqueName": "C:\\Users\\PCuser\\Documents\\GitHub\\GM07_ChoiGyeom_Test\\Day18\\Day18.csproj",
         "projectName": "Day18",
-        "projectPath": "C:\\Users\\PCuser\\source\\repos\\Day18\\Day18\\Day18.csproj",
+        "projectPath": "C:\\Users\\PCuser\\Documents\\GitHub\\GM07_ChoiGyeom_Test\\Day18\\Day18.csproj",
         "packagesPath": "C:\\Users\\PCuser\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PCuser\\source\\repos\\Day18\\Day18\\obj\\",
+        "outputPath": "C:\\Users\\PCuser\\Documents\\GitHub\\GM07_ChoiGyeom_Test\\Day18\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
