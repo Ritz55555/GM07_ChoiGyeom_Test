@@ -26,6 +26,10 @@ namespace Total
         int a = 10;
         int b = 10;
         
+        public List<SkillDes> NowSkill()
+        {
+            return skillList;
+        }
         public void BattleStart(MonsterStat monster)
         {
             battle.BattleNow(monster, playerStat, skillList, itemList, this);
@@ -53,7 +57,7 @@ namespace Total
                 itemList.Remove(itemList[itemList.Count - 1]);
             }
         }
-        public void InvenItemBuy(List<ItemDes> code) //인벤토리에 아이템 넣기
+        public void InvenItemBuy(List<ItemDes> code) 
         {
             itemList.Add(item.BuyItem(code));
             if(itemList[itemList.Count - 1].Type == "더미")
@@ -62,7 +66,7 @@ namespace Total
             }
 
         }
-        public void SkillAdd(int code) //인벤토리에 아이템 넣기
+        public void SkillAdd(int code) 
         {
             skillList.Add(skill.GetSkill(code));
             if (skillList[skillList.Count - 1].Type == "더미")
@@ -70,13 +74,9 @@ namespace Total
                 skillList.Remove(skillList[skillList.Count - 1]);
             }
         }
-        public void SkillBuy(List<SkillDes> code) //인벤토리에 아이템 넣기
+        public void SkillBuy(List<SkillDes> code)
         {
             skillList.Add(skill.BuySkill(code));
-            if (skillList[skillList.Count - 1].Type == "더미")
-            {
-                skillList.Remove(skillList[skillList.Count - 1]);
-            }
         }
         public void AllStatSetting(int k) //아이템 장착/해제 감지
         {
@@ -545,7 +545,6 @@ namespace Total
         {
             ItemArrSet();
             SkillArrSet();
-            SkillAdd(1);
             
             while (true)
             {
@@ -561,12 +560,13 @@ namespace Total
                 ConsoleKeyInfo key = Console.ReadKey(true);
                 if(key.Key == ConsoleKey.D1)
                 {
-                    Random ran = new Random();
+                    Console.Clear();
                     Console.WriteLine("사냥터 선택하기");
                     Console.WriteLine("1. 초원  2. 숲  3. 호수  4. 동굴  5. 동굴 깊은곳");
                     key = Console.ReadKey(true);
                     if(key.Key == ConsoleKey.D1)
                     {
+                        Console.Clear();
                         Console.WriteLine("=====초원=====");
                         Console.WriteLine("1. 적을 찾기");
                         Console.WriteLine("아무 키나 눌러 돌아가기");
@@ -578,6 +578,7 @@ namespace Total
                     }
                     else if(key.Key == ConsoleKey.D2)
                     {
+                        Console.Clear();
                         Console.WriteLine("=====숲=====");
                         Console.WriteLine("1. 적을 찾기");
                         Console.WriteLine("아무 키나 눌러 돌아가기");
@@ -589,6 +590,7 @@ namespace Total
                     }
                     else if (key.Key == ConsoleKey.D3)
                     {
+                        Console.Clear();
                         Console.WriteLine("=====호수=====");
                         Console.WriteLine("1. 적을 찾기");
                         Console.WriteLine("아무 키나 눌러 돌아가기");
@@ -600,6 +602,7 @@ namespace Total
                     }
                     else if (key.Key == ConsoleKey.D4)
                     {
+                        Console.Clear();
                         Console.WriteLine("=====동굴=====");
                         Console.WriteLine("1. 적을 찾기");
                         Console.WriteLine("아무 키나 눌러 돌아가기");
@@ -611,6 +614,7 @@ namespace Total
                     }
                     else if (key.Key == ConsoleKey.D5)
                     {
+                        Console.Clear();
                         Console.WriteLine("=====동굴 깊은곳=====");
                         Console.WriteLine("1. 적을 찾기");
                         Console.WriteLine("아무 키나 눌러 돌아가기");
@@ -647,21 +651,9 @@ namespace Total
                         }
                         else if(key.Key == ConsoleKey.D2)
                         {
-                            List<SkillDes> buy = allShop.Traing(playerStat);
-                            List<SkillDes> check = skillList;
-                            bool checkCheck = true;
-                            check.Add(buy[0]);
-                            for(int i = 0; i < check.Count; i++)
-                            {
-                                if (check[i].Name == check[check.Count - 1].Name)
-                                {
-                                    Console.WriteLine("중복된 스킬입니다. 구매가 불가능합니다.");
-                                    InKey();
-                                    playerStat.Gold += 1000;
-                                    checkCheck = false;
-                                    break;
-                                }
-                            }
+
+                            
+                            var (buy,checkCheck) = allShop.Traning(playerStat, this);
                             if (checkCheck == true)
                             {
                                 SkillBuy(buy);

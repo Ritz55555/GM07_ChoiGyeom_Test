@@ -22,6 +22,7 @@ namespace Day18
     class SkillTotal
     {
         SortedDictionary<int, SkillDes> skillDes = new SortedDictionary<int, SkillDes>();
+        
         public void SkillAdd(int code,string name, string des, string type, int value, int cost)
         {
             SkillDes skill = new SkillDes(name, des, type, value, cost);

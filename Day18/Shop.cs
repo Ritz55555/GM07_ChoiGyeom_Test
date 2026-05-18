@@ -1,6 +1,7 @@
 ﻿using Day18;
 using Item;
 using Player;
+using Total;
 
 namespace Shop
 {
@@ -105,15 +106,15 @@ namespace Shop
             }
             return value;
         }
-        public List<SkillDes> Traing(PlayerStat player)
+        public (List<SkillDes>, bool) Traning(PlayerStat player,TotalIm total)
         {
             skillTotal.SkillArr();
             int page = 0;
             int k = 0;
             List<SkillDes> shopList = new List<SkillDes>();
-            List<SkillDes> value = new List<SkillDes>();
-            SkillDes skill = new SkillDes("", "", "더미", 0, 0);
-            value.Add(skill);
+            bool value = true;
+            List<SkillDes> nowSkillList = total.NowSkill();    
+            List<SkillDes> check = new List<SkillDes>();
             for (int i = 1; i < 400; i++)
             {
                 shopList.Add(skillTotal.GetSkill(i));
@@ -165,19 +166,33 @@ namespace Shop
                 {
                     k = int.Parse(key.KeyChar.ToString()) + page;
                     if (k < shopList.Count)
-                    {
+                    {    
                         Console.WriteLine($"이름 : {shopList[k].Name}\n가격 : 1000\n스킬을 배우시겠습니까?\n1. 배우기 (아무 키나 눌러 취소하기)");
                         key = Console.ReadKey(true);
                         if (key.Key == ConsoleKey.D1)
                         {
                             if (player.Gold >= 1000)
                             {
-                                Console.WriteLine($"{shopList[k].Name}을 배우셨습니다!");
-                                player.Gold -= 1000;
-                                value.Clear();
-                                value.Add(shopList[k]);
-                                InKey();
-                                break;
+                                value = true;
+                                for (int i = 0; i < nowSkillList.Count; i++)
+                                {
+                                    if (shopList[k].Name == nowSkillList[i].Name)
+                                    {
+                                        Console.WriteLine("중복된 스킬입니다. 구매가 불가능합니다.");
+                                        InKey();
+                                        value = false;
+                                        break;
+                                    }
+                                }
+                                if(value == true)
+                                {
+                                    Console.WriteLine($"{shopList[k].Name}을 배우셨습니다!");
+                                    check.Clear();
+                                    check.Add(shopList[k]);
+                                    player.Gold -= 1000;
+                                    InKey();
+                                    break;
+                                }  
                             }
                             else
                             {
@@ -195,7 +210,8 @@ namespace Shop
                     }
                 }
             }
-            return value;
+
+            return (check,value);
         }
     }
 }
